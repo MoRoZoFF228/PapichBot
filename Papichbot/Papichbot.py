@@ -15,7 +15,7 @@ bot = commands.Bot(
 
 @bot.event
 async def on_ready():
-    game = discord.Game("-info | Patch v0.6.0")
+    game = discord.Game("-info | Patch v0.6.5")
     await bot.change_presence(status=discord.Status.idle, activity=game)
     print("\nLogged in as:",bot.user.name)
     print("ID:",bot.user.id)
@@ -30,15 +30,73 @@ async def on_ready():
 @bot.event
 async def on_message_delete(payload):
    channel = bot.get_channel(id=825421428501250088)
-   embed = discord.Embed(title="Сообщение было удалено", colour=discord.Colour(16711680), description="")
-    
-   embed.add_field(name="Удалённое сообщение", value='```Удалённое сообщение```')
+   embed = discord.Embed(title="Сообщение было удалено", colour=discord.Colour(168469), description="Удаленное сообщение:")
+   embed.add_field(name=f"Автор: (указать автора), message.content", value='message.id')
    await channel.send(content = '_ _', embed=embed)
    
 
+@bot.event
+async def on_member_join(member):
+   channel = bot.get_channel(id=825421428501250088)
+   embed = discord.Embed(title="Участник присоединился к серверу", colour=discord.Colour(16567481), description=f"Участник {member} присоединился к серверу")
+   embed.add_field(name="Указать выданные роли", value='message.author')
+   await channel.send(content = '_ _', embed=embed)
+   
+
+@bot.event
+async def on_member_ban(guilg, user):
+   channel = bot.get_channel(id=825421428501250088)
+   embed = discord.Embed(title="Участник был забанен", colour=discord.Colour(16711680), description=f"Участник {user} Был забанен")
+   embed.add_field(name='Причина бана:', value='message.id')
+   await channel.send(content = '_ _', embed=embed)
+
+
+@bot.event
+async def on_message_edit(before, after):
+   channel = bot.get_channel(id=825421428501250088)
+   embed = discord.Embed(title="Сообщение было изменено", colour=discord.Colour(16712791), description="Старое содержимое:")
+   embed.add_field(name="Новое содержимое:", value="message.content")
+   await channel.send(content = '_ _', embed=embed)
+
+
+@bot.event
+async def on_member_remove(member):
+   channel = bot.get_channel(id=825421428501250088)
+   embed = discord.Embed(title="Пользователь покинул сервер", colour=discord.Colour(15601680), description=f"Пользователь {member} покинул сервер")
+   await channel.send(content = '_ _', embed=embed)
+
+
+@bot.event
+async def on_user_update(before, after):
+   channel = bot.get_channel(id=825421428501250088)
+   embed = discord.Embed(title="Профиль пользователя (указать пользователя) был изменён", colour=discord.Colour(16722791), description="")
+   embed.add_field(name="Последние изменения:", value="(указать последние изменения профиля)")
+   await channel.send(content = '_ _', embed=embed)
+
+
+@bot.event
+async def on_voice_state_update(user, before, after):
+    channel = bot.get_channel(id=825421428501250088)
+    embed = discord.Embed(title="Пользователь зашел/покинул голосовай канал", colour=discord.Colour(15722791), description=f"Пользователь {user} присоединился/покинул голосовой канал:")
+    embed.add_field(name="(название голосового канала)", value="_ _")
+    await channel.send(content = "_ _", embed=embed)
+
+
+@bot.event
+async def on_member_unban(guild, user):
+    channel = bot.get_channel(id=825421428501250088)
+    embed = discord.Embed(title=f"Пользователь {user} был разбанен", colour=discord.Colour(16711680), description="")
+    await channel.send(content = "_ _", embed=embed)
 
 
 
+
+
+@bot.command(name = 'carrot')
+async def carrot(ctx, user_id=820659313638768660):
+    user = await bot.fetch_user(user_id=user_id)
+    await user.send('По вашей просьбе была создана Морковная республика. Так что можете собирать вещи и радоваться путешевствию) За путёвкой обращаться к MoRoZoFF228#2697. Удачного путешевствия')
+    await user.send(file = discord.File('carrot.png'))
 
 class MyMenu(menus.Menu):
     async def send_initial_message(self, ctx, channel):
