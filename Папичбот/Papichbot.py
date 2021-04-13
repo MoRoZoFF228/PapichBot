@@ -259,4 +259,4 @@ async def cool(ctx):
 
 
 
-bot.run("NzY3MDgwNjAxNjE0MDI0NzI0.X4stew.aj6SpNppy0_80V052M55YCiYPgo")
+bot.run("Болт, а не токен :Mefe:")
