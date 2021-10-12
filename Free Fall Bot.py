@@ -171,4 +171,4 @@ async def question(ctx):
     await ctx.send(content="Команды тестовые! Во время разработки они будут улучшаться", embed=embed)
 
 
-bot.run("ODMxNTYxOTU3MzMzMTM5NTA3.YHXCbA.QWSjCJaC4WuImkT_ik-4JZP6MGc")
+bot.run(bot_token)
